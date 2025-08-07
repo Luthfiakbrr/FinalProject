@@ -1,0 +1,83 @@
+plugins {
+    id 'java'
+    id 'io.qameta.allure' version '2.11.2'
+}
+
+group = 'org.example'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Cucumber
+    testImplementation 'io.cucumber:cucumber-java:7.16.1'
+    testImplementation 'io.cucumber:cucumber-testng:7.16.1'
+    testImplementation 'io.qameta.allure:allure-cucumber7-jvm:2.24.0'
+
+
+    // TestNG
+    testImplementation 'org.testng:testng:7.9.0'
+
+    // JUnit 5 (untuk compatibility Allure)
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.10.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.10.2'
+
+    // Assertions
+    testImplementation 'org.assertj:assertj-core:3.24.2'
+
+    // Selenium
+    testImplementation 'org.seleniumhq.selenium:selenium-java:4.21.0'
+
+    // RestAssured
+    testImplementation 'io.rest-assured:rest-assured:5.4.0'
+
+    // Allure Cucumber adapter
+    testImplementation 'io.qameta.allure:allure-cucumber7-jvm:2.23.0'
+    testImplementation 'io.qameta.allure:allure-testng:2.24.0'
+
+}
+
+test {
+    useTestNG()
+    systemProperty "cucumber.filter.tags", System.getProperty("cucumber.filter.tags", "not @ignore")
+    testLogging {
+        events "passed", "failed", "skipped"
+    }
+}
+
+tasks.register("runApiTests", Test) {
+    useTestNG()
+    systemProperty "cucumber.filter.tags", "@api"
+    testClassesDirs = sourceSets.test.output.classesDirs
+    classpath = sourceSets.test.runtimeClasspath
+    outputs.upToDateWhen { false }
+    shouldRunAfter("cleanTest")
+}
+
+tasks.register("runUiTests", Test) {
+    useTestNG()
+    systemProperty "cucumber.filter.tags", "@ui"
+    testClassesDirs = sourceSets.test.output.classesDirs
+    classpath = sourceSets.test.runtimeClasspath
+    outputs.upToDateWhen { false }
+    shouldRunAfter("cleanTest")
+}
+
+// Tidak perlu membuat task allureReport secara manual, sudah dibuat otomatis oleh plugin
+// Tapi kamu boleh tambahkan allureServe jika ingin menjalankan secara lokal
+
+//tasks.register("allureReport", Exec) {
+//    dependsOn test
+//    commandLine "allure", "generate", "build/allure-results", "--clean", "-o", "build/allure-report"
+//}
+
+
+allure {
+    version = '2.24.0'
+    useJUnit5 {
+        version = '2.24.0'
+    }
+}
+
