@@ -1,3 +1,22 @@
+<<<<<<< HEAD
+# Automation Test Framework - Final Project
+
+## 🔧 Tools & Libraries
+- Java 17
+- Gradle
+- Selenium WebDriver
+- RestAssured
+- Cucumber (Gherkin)
+- TestNG
+- GitHub Actions
+
+## 🌐 Test Target
+- **Web UI:** [https://www.demoblaze.com](https://www.demoblaze.com)
+- **API:** [https://dummyapi.io](https://dummyapi.io/docs)
+
+## 🗂️ Folder Structure
+
+=======
 # Automation Test Framework
 
 ## 🚀 Teknologi
@@ -19,3 +38,4 @@
 ```bash
 ./gradlew runApiTests
 ./gradlew runWebTests
+>>>>>>> 27c271d (push Feedback)

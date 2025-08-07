@@ -1,9 +1,15 @@
 plugins {
     id 'java'
+<<<<<<< HEAD
+}
+
+group = 'com.finalproject'
+=======
     id 'io.qameta.allure' version '2.11.2'
 }
 
 group = 'org.example'
+>>>>>>> 27c271d (push Feedback)
 version = '1.0-SNAPSHOT'
 
 repositories {
@@ -11,6 +17,13 @@ repositories {
 }
 
 dependencies {
+<<<<<<< HEAD
+    testImplementation 'io.cucumber:cucumber-java:7.14.0'
+    testImplementation 'io.cucumber:cucumber-testng:7.14.0'
+    testImplementation 'org.testng:testng:7.10.2'
+    testImplementation 'io.rest-assured:rest-assured:5.4.0'
+    testImplementation 'org.seleniumhq.selenium:selenium-java:4.21.0'
+=======
     // Cucumber
     testImplementation 'io.cucumber:cucumber-java:7.16.1'
     testImplementation 'io.cucumber:cucumber-testng:7.16.1'
@@ -37,10 +50,31 @@ dependencies {
     testImplementation 'io.qameta.allure:allure-cucumber7-jvm:2.23.0'
     testImplementation 'io.qameta.allure:allure-testng:2.24.0'
 
+>>>>>>> 27c271d (push Feedback)
 }
 
 test {
     useTestNG()
+<<<<<<< HEAD
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+}
+
+tasks.register('testApi', Test) {
+    useTestNG()
+    systemProperty 'cucumber.filter.tags', '@api'
+    testClassesDirs = sourceSets.test.output.classesDirs
+    classpath = sourceSets.test.runtimeClasspath
+}
+
+tasks.register('testWeb', Test) {
+    useTestNG()
+    systemProperty 'cucumber.filter.tags', '@web'
+    testClassesDirs = sourceSets.test.output.classesDirs
+    classpath = sourceSets.test.runtimeClasspath
+}
+=======
     systemProperty "cucumber.filter.tags", System.getProperty("cucumber.filter.tags", "not @ignore")
     testLogging {
         events "passed", "failed", "skipped"
@@ -81,3 +115,4 @@ allure {
     }
 }
 
+>>>>>>> 27c271d (push Feedback)

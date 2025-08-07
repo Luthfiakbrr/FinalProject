@@ -1,3 +1,34 @@
+<<<<<<< HEAD
+Feature: API Testing for User Endpoint
+
+  @api @get
+  Scenario: Get a user by ID
+    Given I set GET endpoint for user with ID "60d0fe4f5311236168a109ca"
+    When I send GET HTTP request
+    Then I receive valid HTTP response code 200
+    And Response body should contain user ID "60d0fe4f5311236168a109ca"
+
+  Scenario: Create new user with valid data
+    Given I set POST endpoint for creating user
+    When I send POST HTTP request with valid data
+    Then I receive valid HTTP response code 200
+    And Response body should contain the created user's name
+
+  Scenario: Create user with invalid data
+    Given I set POST endpoint for creating user
+    When I send POST HTTP request with missing required fields
+    Then I receive HTTP response code 400
+
+  Scenario: Get user with invalid ID
+    Given I set GET endpoint for user with ID "invalid-id"
+    When I send GET HTTP request
+    Then I receive HTTP response code 400
+
+  Scenario: Delete a user
+    Given I set DELETE endpoint for user with ID "60d0fe4f5311236168a109ca"
+    When I send DELETE HTTP request
+    Then I receive valid HTTP response code 200
+=======
 @api
 Feature: User API tests using DummyAPI
 
@@ -45,3 +76,4 @@ Feature: User API tests using DummyAPI
     And response should reflect updated fields
     When I send a DELETE request to delete the user
     Then the response status should be 200
+>>>>>>> 27c271d (push Feedback)
